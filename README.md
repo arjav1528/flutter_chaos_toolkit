@@ -21,23 +21,43 @@ dependencies:
 ### Usage
 
 ```dart
-Stack(
-  children: [
-    const MyAppContent(),
-    ChaosOverlay(
-      config: ChaosConfig(
-        showFPS: true,
-        showFrameTime: true,
-        showJankPercent: true,
-        showMemory: true,
-        showCPU: true,
-        showNetworkProfile: true,
-        position: ChaosPosition.topLeft,
-        networkProfile: NetworkProfile.normal,
+import 'package:flutter/material.dart';
+import 'package:flutter_chaos_toolkit/flutter_chaos_toolkit.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      builder: (BuildContext context, Widget? child) {
+        return Stack(
+          children: <Widget>[
+            child ?? const SizedBox.shrink(),
+            const ChaosOverlay(
+              config: ChaosConfig(
+                showFPS: true,
+                showMemory: true,
+                showFrameTime: true,
+                showJankPercent: true,
+                showNetworkProfile: true,
+                position: ChaosPosition.topRight,
+                networkProfile: NetworkProfile.normal,
+              ),
+            ),
+          ],
+        );
+      },
+      home: const Scaffold(
+        body: Center(child: Text('Your app content')),
       ),
-    ),
-  ],
-)
+    );
+  }
+}
 ```
 
 ### Runtime Reconfiguration
