@@ -15,7 +15,7 @@ Add to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_chaos_toolkit: ^0.1.0
+  flutter_chaos_toolkit: ^0.1.1
 ```
 
 ### Usage
