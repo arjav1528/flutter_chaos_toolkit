@@ -59,3 +59,11 @@ final ChaosHttpResult result = await ChaosToolkit.instance.httpClient.get(
 );
 print('${result.profile.label}: ${result.durationMs}ms');
 ```
+
+### Sample Screenshots
+
+<img width="1206" height="2622" alt="Chaos Toolkit - Normal Profile<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 17 - 2026-04-10 at 19 44 56" src="https://github.com/user-attachments/assets/d5c6ef0c-3695-4a64-9368-27ff16b946bc" />
+
+
+
+
