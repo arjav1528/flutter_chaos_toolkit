@@ -27,7 +27,13 @@ Stack(
     ChaosOverlay(
       config: ChaosConfig(
         showFPS: true,
+        showFrameTime: true,
+        showJankPercent: true,
         showMemory: true,
+        showCPU: true,
+        showNetworkProfile: true,
+        position: ChaosPosition.topLeft,
+        networkProfile: NetworkProfile.normal,
       ),
     ),
   ],

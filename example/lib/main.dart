@@ -32,7 +32,7 @@ class _ChaosExampleAppState extends State<ChaosExampleApp> {
                 showCPU: true,
                 showNetworkProfile: true,
                 position: ChaosPosition.topLeft,
-                networkProfile: _config.networkProfile,
+                networkProfile: NetworkProfile.normal,
               ),
             ),
           ],
