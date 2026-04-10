@@ -1,3 +1,7 @@
-## 0.0.1
+## 0.1.0
 
-* TODO: Describe initial release.
+- Added `ChaosOverlay` with configurable metric rows.
+- Added `ChaosConfig` to accept runtime display options (`showFPS`, `showCPU`, etc.).
+- Added `ChaosOverlayManager` and `ChaosToolkit` singleton for programmatic control.
+- Added metrics pipeline (`FpsTracker`, `MemoryTracker`, `MetricsController`).
+- Added tests and example app with live config toggles.
