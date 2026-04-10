@@ -1,20 +1,21 @@
 name: flutter_chaos_toolkit
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "Runtime performance overlay toolkit for Flutter apps."
+version: 0.1.0
+homepage: https://github.com/example/flutter_chaos_toolkit
 
 environment:
-  sdk: ^3.13.0-4.0.dev
-  flutter: ">=1.17.0"
+  sdk: ">=3.13.0-4.0.dev <4.0.0"
+  flutter: ">=3.43.0-1.0.pre"
 
 dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
+  fake_async: ^1.3.3
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
