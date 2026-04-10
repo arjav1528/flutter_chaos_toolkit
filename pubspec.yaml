@@ -1,7 +1,7 @@
 name: flutter_chaos_toolkit
 description: "Runtime performance overlay toolkit for Flutter apps."
 version: 0.1.0
-homepage: https://github.com/example/flutter_chaos_toolkit
+homepage: https://github.com/arjav1528/flutter_chaos_toolkit
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
