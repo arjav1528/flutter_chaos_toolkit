@@ -85,6 +85,11 @@ class _ChaosOverlayState extends State<ChaosOverlay> {
                     label: 'Jank',
                     value: '${snapshot.jankPercent.toStringAsFixed(1)}%',
                   ),
+                if (widget.config.showNetworkProfile)
+                  MetricRow(
+                    label: 'NET',
+                    value: widget.config.networkProfile.label,
+                  ),
               ];
               if (rows.isEmpty) {
                 return const SizedBox.shrink();

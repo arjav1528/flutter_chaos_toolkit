@@ -14,6 +14,7 @@ class ChaosExampleApp extends StatefulWidget {
 
 class _ChaosExampleAppState extends State<ChaosExampleApp> {
   ChaosConfig _config = ChaosConfig.performance();
+  String _apiResult = 'No API call yet';
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,18 @@ class _ChaosExampleAppState extends State<ChaosExampleApp> {
         return Stack(
           children: <Widget>[
             child ?? const SizedBox.shrink(),
-            ChaosOverlay(config: _config),
+            ChaosOverlay(
+              config: ChaosConfig(
+                showFPS: true,
+                showFrameTime: true,
+                showJankPercent: true,
+                showMemory: true,
+                showCPU: true,
+                showNetworkProfile: true,
+                position: ChaosPosition.topLeft,
+                networkProfile: _config.networkProfile,
+              ),
+            ),
           ],
         );
       },
@@ -49,6 +61,13 @@ class _ChaosExampleAppState extends State<ChaosExampleApp> {
               onChanged: (bool value) =>
                   setState(() => _config = _config.copyWith(showCPU: value)),
             ),
+            SwitchListTile(
+              title: const Text('Show Network Profile'),
+              value: _config.showNetworkProfile,
+              onChanged: (bool value) => setState(
+                () => _config = _config.copyWith(showNetworkProfile: value),
+              ),
+            ),
             DropdownButton<ChaosPosition>(
               value: _config.position,
               items: ChaosPosition.values
@@ -64,6 +83,49 @@ class _ChaosExampleAppState extends State<ChaosExampleApp> {
                 setState(() => _config = _config.copyWith(position: value));
               },
             ),
+            DropdownButton<NetworkProfile>(
+              value: _config.networkProfile,
+              items: NetworkProfile.values
+                  .map(
+                    (NetworkProfile p) => DropdownMenuItem<NetworkProfile>(
+                      value: p,
+                      child: Text(p.label),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (NetworkProfile? value) {
+                if (value == null) return;
+                setState(
+                  () => _config = _config.copyWith(networkProfile: value),
+                );
+                ChaosToolkit.instance.setNetworkProfile(value);
+              },
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () async {
+                final Uri uri = Uri.parse(
+                  'https://jsonplaceholder.typicode.com/todos/1',
+                );
+                try {
+                  final ChaosHttpResult result = await ChaosToolkit
+                      .instance
+                      .httpClient
+                      .get(uri, profile: _config.networkProfile);
+                  setState(() {
+                    _apiResult =
+                        '${result.profile.label}: ${result.durationMs} ms (status ${result.response.statusCode})';
+                  });
+                } on ChaosNetworkException catch (e) {
+                  setState(() => _apiResult = e.message);
+                } catch (e) {
+                  setState(() => _apiResult = 'Request failed: $e');
+                }
+              },
+              child: const Text('Test API Call'),
+            ),
+            const SizedBox(height: 8),
+            Text(_apiResult),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {

@@ -6,6 +6,7 @@ Runtime performance overlay toolkit for Flutter applications.
 - Real-time FPS display from engine `FrameTiming`
 - Optional memory usage display
 - Optional CPU placeholder row for future native integrations
+- Network throttling profiles (`normal`, `2G`, `3G`, `4G`, `no internet`)
 - Configurable placement (`topLeft`, `topRight`, `bottomLeft`, `bottomRight`)
 - Overlay manager API and singleton toolkit controller
 
@@ -40,4 +41,15 @@ ChaosToolkit.instance.configure(
   ChaosConfig.performance().copyWith(showMemory: true),
 );
 ChaosToolkit.instance.show(context);
+```
+
+### Simulate Network Profiles for API Timing
+
+```dart
+ChaosToolkit.instance.setNetworkProfile(NetworkProfile.g3);
+
+final ChaosHttpResult result = await ChaosToolkit.instance.httpClient.get(
+  Uri.parse('https://jsonplaceholder.typicode.com/todos/1'),
+);
+print('${result.profile.label}: ${result.durationMs}ms');
 ```
